@@ -1,0 +1,28 @@
+services:
+  app:
+    container_name: laravel_app
+    build:
+      context: ./exemple-app
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "./exemple-app:/app" 
+      - "./nginx/nginx.conf:/etc/nginx/nginx.conf"  
+      - "./ssl:/etc/nginx/ssl"   
+    depends_on:
+      - db
+  db:
+    container_name: laravel_db
+    image: mariadb:11.3
+    environment:
+      MARIADB_DATABASE: laravel
+      MARIADB_USER: root
+      MARIADB_PASSWORD: debian
+      MARIADB_ROOT_PASSWORD: debian
+    ports:
+      - "3306:3306"
+    volumes:
+       - "./sql-scripts:/docker-entrypoint-initdb.d"
+
