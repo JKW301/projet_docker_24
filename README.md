@@ -34,10 +34,8 @@ Ensuite, le docker-compose télécharge une image de MariaDB en spécifiant les 
 D'autre part, nous avons définit des noms aux deux conteneurs :
   - laravel_db
   - laravel_app
+Le nommage est utile, notamment pour donner le DB_HOST dans le fichier .env qui est à la racine du projet dans le conteneur laravel_app
 
 Sur la machine locale, il faut également créer les certificats SSL pour pouvoir pleinement profiter du site web (authentification à la page de connexion). Il faut également coder le nginx.conf.
 De plus, pour éviter de devoir créer les tables dans le laravel_app via la commande "php artisan migrate", nous avons inclu un init.sql dans le dossier sql-scripts.
 En tout, nous avons donc 3 volumes.    
-
-#### .env
-Dans la Il est conseillé de placer un DB_HOST=nom_du_container, soit laravel_db
